@@ -14,8 +14,8 @@ export default function Login() {
   const sesionStart = (e)=>{
     e.preventDefault();
     
-    let getUsuario = document,getElementById('usuario').value;
-    let getPass = document,getElementById('pass').value;
+    let getUsuario = document.getElementById('usuario').value;
+    let getPass = document.getElementById('pass').value;
     if (getUsuario.length === 0 && getPass.length === 0) {
       alert("No puede quedar vacio los campos")
     }else{
