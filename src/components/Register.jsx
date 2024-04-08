@@ -25,16 +25,6 @@ export default function Register() {
        
         <input type="submit" value="Entrar" className="submit-button"/>
       </form>
-      <div className='social-net'>
-        <FaFacebookF className='social'/>
-        <FaGoogle  className='social'/>
-        <LuInstagram className='social'/>
-      </div>
-      
-      
-
-      
-      
       </div>
   )
 }
