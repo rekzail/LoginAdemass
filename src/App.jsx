@@ -4,6 +4,10 @@ import  Login  from "./components/Login";
 import  Register  from "./components/Register";
 import  ForgotPassword  from "./components/ForgotPassword"; 
 
+import { AuthProvider } from './firebase/auhContext';
+
+
+
 
 
 function App() {
@@ -11,6 +15,7 @@ function App() {
 
   return (
     <>
+  <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route exact path='/' element={ <Login/> }/>
@@ -18,6 +23,8 @@ function App() {
         <Route exact path='/recovery' element={ <ForgotPassword/> }/>
       </Routes>
     </BrowserRouter>
+  </AuthProvider>
+    
       
     </>
   )

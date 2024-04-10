@@ -71,6 +71,10 @@ body {
   width: 93%;
   border: none;
 }
+.input-login:focus{
+  outline: 1px solid #bdbdbd;
+  box-shadow: 0 0 10px #bdbdbd;
+}
 .submit-button{
   background-color: #467eee;
   padding: 0.3rem 3rem;

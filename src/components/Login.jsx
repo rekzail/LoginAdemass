@@ -6,29 +6,45 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Menu from "../Pages/Menu";
 
+import { useAuth } from "../firebase/auhContext";
+
+
+
+
 export default function Login() {
   const [login, setLogin] = useState(false);
   const [usuario, setUsuario] = useState("");
   const [pass, setPass] = useState("");
-
-  const sesionStart = (e) => {
+  const [error, setError] = useState("");
+  const [loginAttempts, setLoginAttempts] = useState(0);
+  
+  const auth = useAuth();
+ 
+ 
+ 
+  const handleLogin = async (e)=> {
     e.preventDefault();
+    if (!usuario || !pass) {
+      setError("Por favor, complete todos los campos.");
+      return;
+    }
 
-    let getUsuario = document.getElementById("usuario").value;
-    let getPass = document.getElementById("pass").value;
-    if (getUsuario.length === 0 && getPass.length === 0) {
-      alert("No puede quedar vacio los campos");
-    } else {
-      document.getElementById("usuario").value = "";
-      document.getElementById("pass").value = "";
-
-      if (getUsuario == "admin" && getPass == "123") {
-        setLogin("true");
-        document.getElementById("formLogin").style.display = "none";
-        
+    try {
+      await auth.login(usuario, pass);
+      setLogin(true);
+      setLoginAttempts(0);
+      setError(""); 
+    } catch (error) {
+      setError("Error al iniciar sesión. Verifique sus credenciales.");
+      setLoginAttempts(loginAttempts + 1); // Incrementar el contador de intentos
+      if (loginAttempts >= 2) {
+        document.getElementById("forgot").style.display = "block";
       }
     }
-  };
+  }
+
+  
+
   return (
     <div className="login-card">
       <IoPersonCircleOutline className="login-icon person-icon" />
@@ -43,7 +59,7 @@ export default function Login() {
           className="input-login"
           id="usuario"
           onChange={(e) => setUsuario(e.target.value)}
-          pattern="[a-zA-Z0-9_-]{3,16}"
+          
           required
         />
         <label htmlFor="" className="label-login">
@@ -54,7 +70,7 @@ export default function Login() {
           className="input-login"
           id="pass"
           onChange={(e) => setPass(e.target.value)}
-          pattern=".{6,}"
+          
           title="La contraseña debe tener al menos 6 caracteres"
           required
         />
@@ -62,12 +78,14 @@ export default function Login() {
           type="submit"
           value="Entrar"
           className="submit-button"
-          onClick={sesionStart}
+          onClick={handleLogin}
         />
       </form>
-      <span className="forgot">
-        <NavLink to="/recovery" />
-        forgot password?
+      {error && <div className="error">{error}</div>}
+      <span className="forgot" id="forgot">
+        <NavLink to="/recovery" >
+         forgot password?
+        </NavLink>
       </span>
       <span>Don&apos;t have an acount</span>
       <span>
@@ -79,7 +97,7 @@ export default function Login() {
         <FaGoogle className="social" />
         <LuInstagram className="social" />
       </div>
-      {login == 'true' && <Menu user={usuario}/>}
+      {login && <Menu user={usuario}/>}
     </div>
   );
 }

@@ -1,11 +1,18 @@
 import PropTypes from "prop-types";
+import { useAuth } from "../firebase/auhContext";
+
+
+
+
+export default function Menu({ user }) {
+const auth = useAuth()
 const sesionCLosed = () => {
   document.getElementById("menu").style.display = "none";
   document.getElementById("formLogin").style.display = "block";
-
+  auth.logout();
 };
 
-export default function Menu({ user }) {
+
   return (
     <div id="menu">
       <h1 >Hola {user} Ademmas</h1>
