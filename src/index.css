@@ -29,7 +29,7 @@ body {
   align-items: center;
   padding: 0.3rem;
   color: white;
-  transition: transform 0.5s ease;
+ 
 }
 
 @keyframes pivot {
@@ -64,7 +64,7 @@ body {
 
 
 .login-card.animate {
-  animation: pivot 1.5s ease infinite; /* Desplazar la tarjeta hacia la izquierda */
+  animation: pivot 1s ease infinite; /* Desplazar la tarjeta hacia la izquierda */
 }
 
 .login-icon{
