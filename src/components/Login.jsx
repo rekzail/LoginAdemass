@@ -17,6 +17,7 @@ export default function Login() {
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
   const [loginAttempts, setLoginAttempts] = useState(0);
+  const [animate, setAnimate] = useState(false);
   
   const auth = useAuth();
  
@@ -34,9 +35,12 @@ export default function Login() {
       setLogin(true);
       setLoginAttempts(0);
       setError(""); 
+      document.getElementById("formLogin").style.display = "none";
     } catch (error) {
       setError("Error al iniciar sesión. Verifique sus credenciales.");
-      setLoginAttempts(loginAttempts + 1); // Incrementar el contador de intentos
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 1000);
+      setLoginAttempts(loginAttempts + 1); 
       if (loginAttempts >= 2) {
         document.getElementById("forgot").style.display = "block";
       }
@@ -46,7 +50,7 @@ export default function Login() {
   
 
   return (
-    <div className="login-card">
+    <div className={`login-card ${animate ? "animate" : ""}`}>
       <IoPersonCircleOutline className="login-icon person-icon" />
       <FaLock className="login-icon lock" />
       <h1 className="login">login</h1>

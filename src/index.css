@@ -29,8 +29,42 @@ body {
   align-items: center;
   padding: 0.3rem;
   color: white;
+  transition: transform 0.5s ease;
+}
 
-  
+@keyframes pivot {
+  0% {
+    transform: translateX(10px); /* Sin rotación al inicio */
+  }
+  12% {
+    transform: translateX(-20px); /* Rotación a la derecha */
+  }
+  25% {
+    transform: translateX(20px); /* Rotación a la derecha */
+  }
+  37% {
+    transform: translateX(-20px); /* Rotación a la derecha */
+  }
+  50% {
+    transform: translateX(20px); /* Rotación a la derecha */
+  }
+  63% {
+    transform: translateX(-20px); /* Rotación a la derecha */
+  }
+  75% {
+    transform: translateX(20); /* Rotación a la izquierda */
+  }
+  87% {
+    transform: translateX(-20); /* Rotación a la izquierda */
+  }
+  100% {
+    transform: translateX(0px); /* Sin rotación al final */
+  }
+}
+
+
+.login-card.animate {
+  animation: pivot 1.5s ease infinite; /* Desplazar la tarjeta hacia la izquierda */
 }
 
 .login-icon{
@@ -108,15 +142,3 @@ body {
 }
 
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
